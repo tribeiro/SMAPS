@@ -1,0 +1,523 @@
+#! /usr/bin/env python
+# -*- coding: iso-8859-1 -*-
+
+# chimera - observatory automation system
+# Copyright (C) 2006-2009  P. Henrique Silva <henrique@astro.ufsc.br>
+
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+from src.mkqueue import MKQueue
+
+from chimera.core.cli import ChimeraCLI, action
+from chimera.core.constants import DEFAULT_PROGRAM_DATABASE
+from chimera.core.callback import callback
+from chimera.util.position import Position
+from chimera.util.output import blue, green, red
+
+from chimera.controllers.scheduler.status import SchedulerStatus
+from chimera.controllers.scheduler.states import State
+#from chimera.controllers.scheduler.mkqueue import MKQueue
+from chimera.controllers.scheduler.model import (Session, Targets, Program, Point,
+                                                 Expose, PointVerify, AutoFocus, Projects)
+
+
+import re
+import sys
+import os
+import shutil
+import time
+
+class ChimeraSched (ChimeraCLI):
+
+
+    
+    def __init__ (self):
+        ChimeraCLI.__init__(self, "chimera-mkqueue", "Scheduler controller", 0.1, port=9010)
+
+
+        self.mkqueue = MKQueue()
+
+        self.addHelpGroup("SCHEDULER", "Scheduler")
+        self.addController(name="scheduler", cls="Scheduler", required=True,
+                           help="Scheduler controller to be used", helpGroup="SCHEDULER")
+
+        databaseHelp = """Database options:\n\tInput object database must have the following format:
+
+		# name,	 ra,		  dec,		 epoch,flag, mag*
+		OBJ0000,16:17:55.00,-14:35:52.00,2000.,P1,
+		OBJ0001,15:28:16.00,-06:14:21.00,2000.,P1,
+		OBJ0002,15:28:13.00,-06:15:54.00,2000.,P2,
+		OBJ0003,16:30:18.00,-11:39:08.00,2000.,P2,
+		TPHE A ,00:30:09.00,-46:31:22.00,2000.,STD,14.651
+		TPHE B ,00:30:16.00,-46:27:55.00,2000.,STD,12.334
+		TPHE C ,00:30:17.00,-46:32:34.00,2000.,STD,14.376
+		TPHE D ,00:30:18.00,-46:31:11.00,2000.,STD,13.118
+
+		This specify projects P1, P2 and STD. 
+		
+		P1 and P2 are science targets and STD are standard targets. 
+		* - Magnitude is optional and may be used for magnitude selection cut, usefull for standard fields.
+	
+		To specify projects observational parameters use a configuration file like:
+		
+		[P1]
+		targetschedAlgorith =  2
+		targetFilter	    =  U, B, V, R, I
+		targetExpTime	    =  120, 90, 80, 60, 60
+		targetMaxAirmass    =  1.3, 1.3, 1.4, 1.4, 1.8
+		targetMaxMoonBright =  30., 30., 50., 60., 80.
+		targetMinMoonBright =   0.,  0., 20., 30., 50.
+		targetMinMoonDist   =  30., 30., 30., 30., 30.
+		targetMaxSeeing	    =  0.8, 0.8, 0.8, 1.2, 1.2
+		targetCloudCover    =  0, 0, 1, 1, 2
+		targetApplyExtCorr  =  1, 1, 0, 0, 0
+
+		[P2]
+		targetschedAlgorith =  2
+		targetFilter	    =  V, R, I
+		targetExpTime	    =  90, 90, 120
+		targetMaxAirmass    =  1.8
+		targetMaxMoonBright =  60.
+		targetMinMoonBright =   0.
+		targetMinMoonDist   =  30.
+		targetMaxSeeing	    =  1.3
+		targetCloudCover    =  1
+		targetApplyExtCorr  =  1
+
+		[STD]
+		targetschedAlgorith =  1
+		targetFilter	    =  U, B, V, R, I
+		targetExpTime	    =  120, 90, 90, 90, 90
+		targetMaxAirmass    =  2.5
+		targetMaxMoonBright =  100.
+		targetMinMoonBright =    0.
+		targetMinMoonDist   =  30.
+		targetMaxSeeing	    =  2.0
+		targetCloudCover    =  3
+		targetApplyExtCorr  =  0
+		
+		The parameters can be checked on mkqueue help page. The configuration can be parsed as separate
+		files or each in a single file. This need only be specified once or, should you need to change
+		any of the parameters. Calibrations are derived from the projects configuration files and 
+		scheduled at the begining of the night.
+		
+        """
+		
+        runHelp = '''To schedule observations for a specific night, the user must run the queue maker
+		multiple times, selecting differente projects to fill in the night. Usually you start by 
+		selecting standard stars and then science targets to fill the void. You can use modifiers such
+		as --nstd to select the number of standard stars and --nstdobs to select the number of observations
+		for each standard star. It is also possible to include magnitude limits and (in the future) color
+		cuts. 
+		
+		Sample calls are:
+		
+		- To select standards:
+		#
+		
+		- To fill the rest of the night with science targets from project P1:
+		#
+		
+		'''
+
+        self.addHelpGroup("DB" , databaseHelp)
+
+        self.addHelpGroup("RUN" , runHelp)
+		
+        self.addParameters(dict(name="filename", long="file", short="f", helpGroup="DB", default="",
+                                help="Filename of the input database or configuration file.", metavar="FILENAME"))
+        self.addParameters(dict(name="nstd", long="nstd", helpGroup="RUN", default=3, type=int,
+                                help="Number of standard stars to be selected.", metavar="NSTD"))
+        self.addParameters(dict(name="nstdobs", long="nstdobs", helpGroup="RUN", default=3, type=int,
+                                help="Number of standard stars observations to be scheduled.", metavar="NSTDOBS"))
+        self.addParameters(dict(name="pid", long="pid", helpGroup="RUN",default="",
+                                help="Select a project from the project database.", metavar="PID"))
+        self.addParameters(dict(name="JD", long="jd", helpGroup="RUN", type=float,
+                                help="Julian day of the observations to be scheduled.", metavar="JD"))
+
+    @action(long="cleanQueue", help="Delete all programs in the queue.",
+            helpGroup="DB", actionGroup="DB")
+    def cleanQueue(self,options):
+        # save a copy
+        if os.path.exists(DEFAULT_PROGRAM_DATABASE):
+            shutil.copy(DEFAULT_PROGRAM_DATABASE, "%s.%s.bak" % (DEFAULT_PROGRAM_DATABASE, time.strftime("%Y%m%d%H%M%S")))
+
+        # delete all programs
+        session = Session()
+        programs = session.query(Program).all()
+        for program in programs:
+            session.delete(program)
+        session.commit()
+
+        
+    @action(long="newTargetsDB", help="Generate a new targets database from a text file (excluding all programs already in database)",
+            helpGroup="DB", actionGroup="DB")
+    def newTargetsDatabase(self, options):
+
+        # save a copy
+        if os.path.exists(DEFAULT_PROGRAM_DATABASE):
+            shutil.copy(DEFAULT_PROGRAM_DATABASE, "%s.%s.bak" % (DEFAULT_PROGRAM_DATABASE, time.strftime("%Y%m%d%H%M%S")))
+
+        # delete all programs
+        session = Session()
+        targets = session.query(Targets).all()
+        for target in targets:
+            session.delete(target)
+        programs = session.query(Program).all()
+        for program in programs:
+            session.delete(program)
+        session.commit()
+
+        self.generateTargetsDatabase(options)
+
+    @action(long="addTargetsDB", help="Add new targets to database from a text file (excluding all programs already in database)",
+            helpGroup="DB", actionGroup="DB")
+    def addTargetsDatabase(self, options):
+
+        # save a copy
+        if os.path.exists(DEFAULT_PROGRAM_DATABASE):
+            shutil.copy(DEFAULT_PROGRAM_DATABASE, "%s.%s.bak" % (DEFAULT_PROGRAM_DATABASE, time.strftime("%Y%m%d%H%M%S")))
+
+        self.generateTargetsDatabase(options)
+
+    @action(long="new", help="Generate a new database from a text file (excluding all programs already in database)",
+            helpGroup="DB", actionGroup="DB")
+    def newDatabase(self, options):
+
+        # save a copy
+        if os.path.exists(DEFAULT_PROGRAM_DATABASE):
+            shutil.copy(DEFAULT_PROGRAM_DATABASE, "%s.%s.bak" % (DEFAULT_PROGRAM_DATABASE, time.strftime("%Y%m%d%H%M%S")))
+
+        # delete all programs
+        session = Session()
+        programs = session.query(Program).all()
+        for program in programs:
+            session.delete(program)
+        session.commit()
+
+        self.generateDatabase(options)
+
+    @action(long="append", help="Append programs to database from a text file",
+            helpGroup="DB", actionGroup="DB")
+    def appendDatabase(self, options):
+        self.generateDatabase(options)
+		
+    @action(long="updateProjectDB", help="Update projects database using information on input file. New projects will be included and existing projects will be modified according to the input parameters.",
+            helpGroup="DB", actionGroup="DB")
+    def updateProjectDB(self, options):
+
+		# save a copy
+		if os.path.exists(DEFAULT_PROGRAM_DATABASE):
+			shutil.copy(DEFAULT_PROGRAM_DATABASE, "%s.%s.bak" % (DEFAULT_PROGRAM_DATABASE, time.strftime("%Y%m%d%H%M%S")))
+
+		import ConfigParser
+
+		config = ConfigParser.RawConfigParser()
+
+		config.read(options.filename)
+
+		session = Session()
+
+		projects = []
+
+		for i,pid in enumerate(config.sections()):
+			# Prepare information in configuration file for inputing in DB.
+
+			projInfo = {}
+
+			for key in config.items(pid):
+				projInfo[key[0]] = [f.replace(' ','') for f in key[1].split(',')]
+
+			nfilter = len(projInfo['targetfilter'])
+			# Making sure that all entries have the same number of itens as the number of filters.
+			# if number differs, will duplicate information on the first item.
+			for key in projInfo.keys():
+				if len(projInfo[key]) != nfilter:
+					projInfo[key] = [projInfo[key][0]]*nfilter
+
+			for nf in range(nfilter):
+				# Query project in database
+				pidDB = session.query(Projects).filter(Projects.flag == pid).filter(Projects.filter == projInfo['targetfilter'][nf])
+				if len(pidDB[:]) > 0:
+					print 'Project %s[%s] is on database...'%(pid,projInfo['targetfilter'][nf])
+					pidDB[0]
+					pidDB[0].pi     = projInfo['targetpi'][nf]
+					pidDB[0].exptime = projInfo['targetexptime'][nf]
+					pidDB[0].maxairmass = projInfo['targetmaxairmass'][nf]
+					pidDB[0].maxmoonBright = projInfo['targetmaxmoonbright'][nf]
+					pidDB[0].minmoonBright = projInfo['targetminmoonbright'][nf]
+					pidDB[0].minmoonDist = projInfo['targetminmoondist'][nf]
+					pidDB[0].maxseeing = projInfo['targetmaxseeing'][nf]
+					pidDB[0].cloudcover = projInfo['targetcloudcover'][nf]
+					pidDB[0].schedalgorith = projInfo['targetschedalgorith'][nf]
+					pidDB[0].applyextcorr = projInfo['targetapplyextcorr'][nf]
+					session.commit()
+				else:
+					print 'Project %s[%s] not in database...'%(pid,projInfo['targetfilter'][nf])
+					newproj = Projects(	flag   = pid,
+										pi     = projInfo['targetpi'][nf],
+										filter = projInfo['targetfilter'][nf],
+										exptime = projInfo['targetexptime'][nf],
+										maxairmass = projInfo['targetmaxairmass'][nf],
+										maxmoonBright = projInfo['targetmaxmoonbright'][nf],
+										minmoonBright = projInfo['targetminmoonbright'][nf],
+										minmoonDist = projInfo['targetminmoondist'][nf],
+										maxseeing = projInfo['targetmaxseeing'][nf],
+										cloudcover = projInfo['targetcloudcover'][nf],
+										schedalgorith = projInfo['targetschedalgorith'][nf],
+										applyextcorr = projInfo['targetapplyextcorr'][nf])
+					projects.append(newproj)
+					
+		session.add_all(projects)
+		session.commit()
+
+    @action(long="deleteProjectDB", help="Delete projects from database. The user select the project with the entry --pid. If none is given none is deleted. It will delete all entries from the project in the project database.",
+            helpGroup="DB", actionGroup="DB")
+    def deleteProjectDB(self, options):
+
+		# save a copy
+		if os.path.exists(DEFAULT_PROGRAM_DATABASE):
+			shutil.copy(DEFAULT_PROGRAM_DATABASE, "%s.%s.bak" % (DEFAULT_PROGRAM_DATABASE, time.strftime("%Y%m%d%H%M%S")))
+
+		session = Session()
+		
+		pid = session.query(Projects).filter(Projects.flag == options.pid)
+		
+		for p in pid:
+			session.delete(p)
+		session.commit()
+
+    @action(long="listProjectDB", help="List projects from database. The user select the project with the entry --pid. If none is given all are listed.",
+            helpGroup="DB", actionGroup="DB")
+    def listProjectDB(self, options):
+
+		session = Session()
+		
+		pid = []
+		
+		if len(options.pid) > 0:
+			pid = session.query(Projects).filter(Projects.flag == options.pid)
+		else:
+			pid = session.query(Projects)
+		
+		for p in pid:
+			print p
+
+    @action(long="selectStandardStars", help="Select standard stars from the main database. By default choose 3 standard stars. The used can edit the number with the option --nstd.",
+            helpGroup="DB", actionGroup="DB")
+    def selectStandardStars(self,options):
+
+		if options.JD and not self.tao.isJD:
+			self.out('Setting JD = %.2f'%(options.JD))
+			self.tao.setJD(options.JD)
+		elif not self.tao.isJD:
+			self.tao.setJD()
+
+		self.tao.selectStandardTargets(options.nstd)
+
+    @action(long="selectScienceTargets", help="Select science stars from the main database. If you want to choose standard stars do it first and then select science targets. Otherwise, the scheduler will fill the entire night with science targets and leave no space for standards.",
+            helpGroup="DB", actionGroup="DB")
+    def selectScienceTargets(self,options):
+
+		if options.JD and not self.tao.isJD:
+			self.out('Setting JD = %.2f'%(options.JD))
+			self.tao.setJD(options.JD)
+		elif not self.tao.isJD:
+			self.tao.setJD()
+
+		self.tao.selectScienceTargets()
+		
+    @action(help="Run the scheduler", helpGroup="RUN", actionGroup="RUN")
+    def start(self, options):
+		self.out("="*40)
+		self.out("Starting ...", end="")
+		if len(options.pid) == 0:
+			self.out('Select a project to be scheduled. Use --listProjectDB to see a list of projects.')
+			self.out("%s" % red("FAIL"))
+			self.out("="*40)
+			return -1
+		else:
+			self.out('Selecting program from %s'%(options.pid))
+						
+			session = Session()
+			
+			projQuery = session.query(Projects).filter(Projects.flag == options.pid).first()
+			
+			if options.JD and not self.mkqueue.isJD:
+				self.out('Setting JD = %.2f'%(options.JD))
+				self.mkqueue.setJD(options)
+			elif not self.mkqueue.isJD:
+				self.mkqueue.setJD(options)
+			
+			if projQuery.schedalgorith == 1:
+			
+				self.out('Selecting standard stars...')
+				self.mkqueue.selectStandardTargets(options.pid,options.nstd,options.nstdobs)
+
+			elif projQuery.schedalgorith == 2:
+			
+				self.out('Selecting science stars...')
+			
+		self.out("%s" % green("OK"))
+		self.out("="*40)
+		return 0
+
+
+    def generateTargetsDatabase(self,options):
+        
+        import numpy as np
+
+        targets = np.loadtxt(options.filename,dtype = 'S',delimiter=',',unpack=True)
+
+        session = Session()
+
+        for i in range(len(targets[0])):
+            p = None
+            try:
+                p = Position.fromRaDec(str(targets[2][i]),str(targets[3][i]))
+            except ValueError:
+                self.out('Object %s has invalid coordinates (%s,%s). Skipping'%(targets[1][i],targets[2][i],targets[3][i]))
+                pass
+            except:
+                raise
+
+            if p:
+                                
+                target = Targets(name=targets[1][i],
+                                 type=targets[0][i],
+                                 targetRa=p.ra.H,
+                                 targetDec=p.dec.D)
+                if len(targets) > 4:
+                    target.targetEpoch = float(targets[4][i])
+                if len(targets) > 5:
+                    target.targetMag = float(targets[5][i])
+                if len(targets) > 6:
+                    target.magFilter = float(targets[6][i])
+
+                self.out('Adding %s...'%(targets[1][i]))
+                session.add(target)
+                session.commit()
+
+
+
+    def generateDatabase(self, options):
+        f = None
+        try:
+            f = open(options.filename, "r")
+        except:
+            self.exit("Could not find '%s'." % options.filename)
+    
+        session = Session()
+
+        lineRe = re.compile('(?P<coord>(?P<ra>[\d:-]+)\s+(?P<dec>\+?[\d:-]+)\s+(?P<epoch>[\dnowNOWJjBb\.]+)\s+)?(?P<imagetype>[\w]+)'
+                            '\s+(?P<objname>\'([^\\n\'\\\\]|\\\\.)*\'|"([^\\n"\\\\]|\\\\.)*"|([^ \\n"\\\\]|\\\\.)*)\s+(?P<exposures>[\w\d\s:\*\(\),]*)')
+        programs = []
+    
+        for i, line in enumerate(f):
+    
+            if line.startswith("#"): continue
+            if len(line) == 1: continue
+    
+            matchs = lineRe.search(line)
+    
+            if matchs is None:
+                print "Couldn't process line #%d" % i
+                continue
+    
+            params = matchs.groupdict()
+
+            position = None
+            objname  = None
+
+            if params.get("coord", None):
+                position  = Position.fromRaDec(params['ra'], params['dec'], params['epoch'])
+
+            imagetype = params['imagetype'].upper()
+            objname   = params['objname'].replace("\"", "")
+
+            multiplier, exps = params['exposures'].split("*")
+            try:
+                multiplier = int(multiplier)
+            except ValueError:
+                multiplier = 1
+
+            exps = exps.replace("(", "").replace(")", "").strip().split(",")
+            
+            for i in range(multiplier):
+    
+                program = Program(name="%s-%03d" % (objname.replace(" ", ""), i))
+
+                self.out("# program: %s" % program.name)
+
+                if imagetype == "OBJECT":
+                    if position:
+                        program.actions.append(Point(targetRaDec=position))
+                    else:
+                        program.actions.append(Point(targetName=objname))
+
+                if imagetype == "FLAT":
+                    site = self._remoteManager.getProxy("/Site/0")
+                    flatPosition = Position.fromAltAz(site['flat_alt'], site['flat_az'])
+                    program.actions.append(Point(targetAltAz=flatPosition))
+    
+                #if i == 0:
+                #    program.actions.append(AutoFocus(start=1500, end=3000, step=250, filter="R", exptime=10))
+                #    program.actions.append(PointVerify(here=True))
+    
+                for exp in exps:
+                    if exp.count(":") > 1:
+                        filter, exptime, frames = exp.strip().split(":")
+                    else:
+                        filter, exptime = exp.strip().split(":")
+                        frames = 1
+
+                    if imagetype in ("OBJECT", "FLAT"):
+                        shutter = "OPEN"
+                    else:
+                        shutter = "CLOSE"
+
+                    if imagetype == "BIAS":
+                        exptime = 0
+
+                    if imagetype in ("BIAS", "DARK"):
+                        filter = None
+
+                    self.out("%s %s %s filter=%s exptime=%s frames=%s" % (imagetype, objname, str(position), filter, exptime, frames))
+    
+                    program.actions.append(Expose(shutter=shutter,
+                                                  filename="%s-$DATE-$TIME" % objname.replace(" ", ""),
+                                                  filter=filter,
+                                                  frames=frames,
+                                                  exptime=exptime,
+                                                  imageType=imagetype,
+                                                  objectName=objname))
+                self.out("")
+                programs.append(program)
+    
+        session.add_all(programs)
+        session.commit()
+
+        self.out("Restart the scheduler to run it with the new database.")
+
+    
+
+def main():
+    cli = ChimeraSched()
+    cli.run(sys.argv)
+    cli.wait()
+    
+if __name__ == '__main__':
+
+    main()

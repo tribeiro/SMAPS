@@ -6,11 +6,284 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXFileReference section */
+		F12D202F18C116500044FAF4 /* surveysim_02.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = surveysim_02.py; path = SPLUS/surveysim_02.py; sourceTree = "<group>"; };
+		F12D203018C425530044FAF4 /* surveysimF.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = surveysimF.py; path = SPLUS/surveysimF.py; sourceTree = "<group>"; };
+		F12D203118C434950044FAF4 /* surveysim_03.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = surveysim_03.py; path = SPLUS/surveysim_03.py; sourceTree = "<group>"; };
+		F12D203318C7F5580044FAF4 /* surveyEvol.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = surveyEvol.py; path = SPLUS/surveyEvol.py; sourceTree = "<group>"; };
+		F13BC2D918231FCA004B1428 /* make_buffer.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = make_buffer.py; path = T80S_camera/make_buffer.py; sourceTree = "<group>"; };
+		F13BC2DB1823E8E5004B1428 /* cosmetics.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = cosmetics.py; path = T80S_camera/cosmetics.py; sourceTree = "<group>"; };
+		F13BC2DC1823F7E1004B1428 /* imageboxcarr.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = imageboxcarr.py; path = T80S_camera/imageboxcarr.py; sourceTree = "<group>"; };
+		F13BC2E0182A701F004B1428 /* imageboxcarr_ocl.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = imageboxcarr_ocl.py; path = T80S_camera/imageboxcarr_ocl.py; sourceTree = "<group>"; };
+		F13BC2E2182A87A3004B1428 /* badpixelmask.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = badpixelmask.py; path = T80S_camera/badpixelmask.py; sourceTree = "<group>"; };
+		F13BC2E3182AAE23004B1428 /* hotpixelmask.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = hotpixelmask.py; path = T80S_camera/hotpixelmask.py; sourceTree = "<group>"; };
+		F1404CD81600BDB00083C93D /* apuntado_norte2.f */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.fortran; path = apuntado_norte2.f; sourceTree = "<group>"; };
+		F1404CD91600BDB00083C93D /* apuntado_sur2.f */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.fortran; path = apuntado_sur2.f; sourceTree = "<group>"; };
+		F1404CDA1600BDB00083C93D /* cambio de coordenadas version 2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "cambio de coordenadas version 2.pdf"; sourceTree = "<group>"; };
+		F1404CDB1600BDB00083C93D /* master_pointing.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = master_pointing.pdf; sourceTree = "<group>"; };
+		F1404CDC1600BDB00083C93D /* T80_apuntado_norte2.f */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.fortran; path = T80_apuntado_norte2.f; sourceTree = "<group>"; };
+		F1404CDD1600BDB00083C93D /* T80_apuntado_sur2.f */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.fortran; path = T80_apuntado_sur2.f; sourceTree = "<group>"; };
+		F14FC2DF18BFBB0E00F8BE5C /* obsarea.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = obsarea.py; path = SPLUS/obsarea.py; sourceTree = "<group>"; };
+		F14FC2E018BFC07000F8BE5C /* auxiliar.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = auxiliar.py; path = SPLUS/auxiliar.py; sourceTree = "<group>"; };
+		F14FC2E218BFE95800F8BE5C /* surveysim_01.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = surveysim_01.py; path = SPLUS/surveysim_01.py; sourceTree = "<group>"; };
+		F16FC59C180E0443002940C8 /* probmap_transient.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = probmap_transient.py; path = variability/probmap_transient.py; sourceTree = "<group>"; };
+		F16FC59D180E0DEC002940C8 /* probmap_pulsating.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = probmap_pulsating.py; path = variability/probmap_pulsating.py; sourceTree = "<group>"; };
+		F16FC59E180ECF96002940C8 /* probmap_binary.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = probmap_binary.py; path = variability/probmap_binary.py; sourceTree = "<group>"; };
+		F176347516CBBF6700F5ACC9 /* pltpts.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = pltpts.py; sourceTree = "<group>"; };
+		F176347616CEE21B00F5ACC9 /* smaps_tiler_south.f */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.fortran; path = smaps_tiler_south.f; sourceTree = "<group>"; };
+		F17BD2A515FED6BA00ECF6C7 /* bestArea01.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = bestArea01.py; sourceTree = "<group>"; };
+		F17BD2A615FED6BA00ECF6C7 /* calcVisArea.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = calcVisArea.py; sourceTree = "<group>"; };
+		F17BD2A715FED6BA00ECF6C7 /* figure1.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = figure1.py; sourceTree = "<group>"; };
+		F17BD2A815FED6BA00ECF6C7 /* figure2.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = figure2.py; sourceTree = "<group>"; };
+		F17BD2A915FED6BA00ECF6C7 /* figure3.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = figure3.py; sourceTree = "<group>"; };
+		F17BD2AA15FED6BA00ECF6C7 /* selectArea.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = selectArea.py; sourceTree = "<group>"; };
+		F17BD2AB15FED6BA00ECF6C7 /* showObsArea.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = showObsArea.py; sourceTree = "<group>"; };
+		F17BD2AC15FED6BA00ECF6C7 /* tileMaker.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = tileMaker.py; sourceTree = "<group>"; };
+		F17E90D316D8AF0500FF61EF /* smaps_tiler_north.f */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.fortran; path = smaps_tiler_north.f; sourceTree = "<group>"; };
+		F17E90D416D8BC8A00FF61EF /* showTiledAreas.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = showTiledAreas.py; sourceTree = "<group>"; };
+		F186F81117008257001C88C3 /* scheduler2.f */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.fortran; name = scheduler2.f; path = scheduler/scheduler2.f; sourceTree = "<group>"; };
+		F1A36CCE18084DD9007FB230 /* binary.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = binary.py; path = ../../Documents/JPAS/variables/binary.py; sourceTree = "<group>"; };
+		F1A36CCF18084DD9007FB230 /* binaryJPAS2.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = binaryJPAS2.py; path = ../../Documents/JPAS/variables/binaryJPAS2.py; sourceTree = "<group>"; };
+		F1A36CD018084DD9007FB230 /* observations.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = observations.py; path = ../../Documents/JPAS/variables/observations.py; sourceTree = "<group>"; };
+		F1A36CD118084DD9007FB230 /* powerLaw.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = powerLaw.py; path = ../../Documents/JPAS/variables/powerLaw.py; sourceTree = "<group>"; };
+		F1A36CD218084DD9007FB230 /* powerLawJPAS2.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = powerLawJPAS2.py; path = ../../Documents/JPAS/variables/powerLawJPAS2.py; sourceTree = "<group>"; };
+		F1A36CD318084DD9007FB230 /* pulsatingJPAS2.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = pulsatingJPAS2.py; path = ../../Documents/JPAS/variables/pulsatingJPAS2.py; sourceTree = "<group>"; };
+		F1A36CD418084DD9007FB230 /* pulsatingStar.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = pulsatingStar.py; path = ../../Documents/JPAS/variables/pulsatingStar.py; sourceTree = "<group>"; };
+		F1A36CD518084DD9007FB230 /* transient.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = transient.py; path = ../../Documents/JPAS/variables/transient.py; sourceTree = "<group>"; };
+		F1A36CD618084DD9007FB230 /* transientJPAS2.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = transientJPAS2.py; path = ../../Documents/JPAS/variables/transientJPAS2.py; sourceTree = "<group>"; };
+		F1A36CD8180A25B9007FB230 /* varModels.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = varModels.py; path = variability/varModels.py; sourceTree = "<group>"; };
+		F1A36CD9180A25D5007FB230 /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = __init__.py; path = variability/__init__.py; sourceTree = "<group>"; };
+		F1A36CDA180AED7E007FB230 /* runMCSIM.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = runMCSIM.py; path = variability/runMCSIM.py; sourceTree = "<group>"; };
+		F1A36CDB180B63EA007FB230 /* runMCSIM_P.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = runMCSIM_P.py; path = variability/runMCSIM_P.py; sourceTree = "<group>"; };
+		F1A36CDC180CDCDD007FB230 /* runMCSIM_PP.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = runMCSIM_PP.py; path = variability/runMCSIM_PP.py; sourceTree = "<group>"; };
+		F1A36CDD180CDD03007FB230 /* runMCSIM_pulsating.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = runMCSIM_pulsating.py; path = variability/runMCSIM_pulsating.py; sourceTree = "<group>"; };
+		F1A36CDE180D619D007FB230 /* runMCSIM_transients.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = runMCSIM_transients.py; path = variability/runMCSIM_transients.py; sourceTree = "<group>"; };
+		F1A876CC18A66C04006F4F57 /* sortSPType.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = sortSPType.py; sourceTree = "<group>"; };
+		F1B25ECA18042B1500664742 /* anim_fits.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = anim_fits.py; sourceTree = "<group>"; };
+		F1C36BFE17A3F8290045AEB6 /* tao.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = tao.py; path = core/tao.py; sourceTree = "<group>"; };
+		F1C36BFF17A3F94E0045AEB6 /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = __init__.py; path = core/__init__.py; sourceTree = "<group>"; };
+		F1C6A37A18CBA8A100B41655 /* compareSurveys.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = compareSurveys.py; sourceTree = "<group>"; };
+		F1D8A8B118E2CC9000693FF4 /* splus_selectregions.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = splus_selectregions.py; sourceTree = "<group>"; };
+		F1DE093015C624CB00632AEB /* visibility.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = visibility.c; sourceTree = "<group>"; };
+		F1DE093115C6271900632AEB /* _skysub.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = _skysub.c; sourceTree = "<group>"; };
+		F1DE093215C6271900632AEB /* skysub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skysub.h; sourceTree = "<group>"; };
+		F1DE093F15C6D7C500632AEB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		F1EA4D2417A02CF400B20123 /* request.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = request.py; sourceTree = "<group>"; };
+		F1EA4D2517A031A800B20123 /* tao.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; name = tao.cfg; path = /Users/tiago/Develop/SMAPs/ChimeraTAO/src/../tao.cfg; sourceTree = "<absolute>"; };
+		F1EBDF8F179E234200DE3208 /* util.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = util.py; sourceTree = "<group>"; };
+		F1EBDF90179E247200DE3208 /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		F1EBDF91179E249400DE3208 /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		F1EBDF92179E24A700DE3208 /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = __init__.py; sourceTree = "<group>"; };
+		F1ECE53D18E2100B00C4A9E6 /* smaps_tiler_MC.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = smaps_tiler_MC.py; sourceTree = "<group>"; };
+		F1EF7C7617F23BAE00AD52EC /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = __init__.py; path = mkqueue/__init__.py; sourceTree = "<group>"; };
+		F1EF7C7717F23BF000AD52EC /* mkqueue.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = mkqueue.py; path = mkqueue/src/mkqueue.py; sourceTree = "<group>"; };
+		F1EF7C7A17F2F2E300AD52EC /* chimera-mkqueue */ = {isa = PBXFileReference; explicitFileType = text.script.python; name = "chimera-mkqueue"; path = "mkqueue/chimera-mkqueue"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.python; };
+		F1EF7C7B17F2F67200AD52EC /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = __init__.py; path = mkqueue/src/__init__.py; sourceTree = "<group>"; };
+		F1EF7C7D17F59DFA00AD52EC /* plot_airmasses.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = plot_airmasses.py; path = Figures/plot_airmasses.py; sourceTree = "<group>"; };
+		F1EF7C7E17F5F00000AD52EC /* plot_airmasses_02.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = plot_airmasses_02.py; path = Figures/plot_airmasses_02.py; sourceTree = "<group>"; };
+		F1EF7C7F17F5FD2E00AD52EC /* plot_airmass_obs.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = plot_airmass_obs.py; sourceTree = "<group>"; };
+		F1F8F58A18D0FBF1006B551B /* fmatch.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = fmatch.py; sourceTree = "<group>"; };
+		F1FBC4771600DDBE00FB17C6 /* sphere.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = sphere.py; sourceTree = "<group>"; };
+		F1FF899F178F3F5A0097EDF6 /* scheduler_T80.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = scheduler_T80.py; path = scheduler/scheduler_T80.py; sourceTree = "<group>"; };
+		F1FF89A0178F408F0097EDF6 /* anim.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = anim.py; path = scheduler/anim.py; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
 /* Begin PBXGroup section */
+		F13BC2DA1823E89A004B1428 /* T80S_camera */ = {
+			isa = PBXGroup;
+			children = (
+				F13BC2D918231FCA004B1428 /* make_buffer.py */,
+				F13BC2DC1823F7E1004B1428 /* imageboxcarr.py */,
+				F13BC2E0182A701F004B1428 /* imageboxcarr_ocl.py */,
+				F13BC2DB1823E8E5004B1428 /* cosmetics.py */,
+				F13BC2E2182A87A3004B1428 /* badpixelmask.py */,
+				F13BC2E3182AAE23004B1428 /* hotpixelmask.py */,
+			);
+			name = T80S_camera;
+			sourceTree = "<group>";
+		};
+		F1404CD71600BDB00083C93D /* coordinatesystemandtiling */ = {
+			isa = PBXGroup;
+			children = (
+				F1404CD81600BDB00083C93D /* apuntado_norte2.f */,
+				F1404CD91600BDB00083C93D /* apuntado_sur2.f */,
+				F1404CDA1600BDB00083C93D /* cambio de coordenadas version 2.pdf */,
+				F1404CDB1600BDB00083C93D /* master_pointing.pdf */,
+				F1404CDC1600BDB00083C93D /* T80_apuntado_norte2.f */,
+				F176347616CEE21B00F5ACC9 /* smaps_tiler_south.f */,
+				F1404CDD1600BDB00083C93D /* T80_apuntado_sur2.f */,
+				F17E90D316D8AF0500FF61EF /* smaps_tiler_north.f */,
+				F1ECE53D18E2100B00C4A9E6 /* smaps_tiler_MC.py */,
+				F1D8A8B118E2CC9000693FF4 /* splus_selectregions.py */,
+			);
+			path = coordinatesystemandtiling;
+			sourceTree = "<group>";
+		};
+		F14FC2DE18BFBAE400F8BE5C /* S-PLUS */ = {
+			isa = PBXGroup;
+			children = (
+				F14FC2E218BFE95800F8BE5C /* surveysim_01.py */,
+				F12D202F18C116500044FAF4 /* surveysim_02.py */,
+				F12D203118C434950044FAF4 /* surveysim_03.py */,
+				F12D203018C425530044FAF4 /* surveysimF.py */,
+				F12D203318C7F5580044FAF4 /* surveyEvol.py */,
+				F14FC2E018BFC07000F8BE5C /* auxiliar.py */,
+				F14FC2DF18BFBB0E00F8BE5C /* obsarea.py */,
+			);
+			name = "S-PLUS";
+			sourceTree = "<group>";
+		};
+		F186F810170081E9001C88C3 /* Scheduler */ = {
+			isa = PBXGroup;
+			children = (
+				F1FF89A0178F408F0097EDF6 /* anim.py */,
+				F1B25ECA18042B1500664742 /* anim_fits.py */,
+				F1FF899F178F3F5A0097EDF6 /* scheduler_T80.py */,
+				F186F81117008257001C88C3 /* scheduler2.f */,
+			);
+			name = Scheduler;
+			sourceTree = "<group>";
+		};
+		F1A36CCD18084DB7007FB230 /* variability */ = {
+			isa = PBXGroup;
+			children = (
+				F1A36CCE18084DD9007FB230 /* binary.py */,
+				F1A36CCF18084DD9007FB230 /* binaryJPAS2.py */,
+				F1A36CD018084DD9007FB230 /* observations.py */,
+				F1A36CD118084DD9007FB230 /* powerLaw.py */,
+				F1A36CD218084DD9007FB230 /* powerLawJPAS2.py */,
+				F1A36CD318084DD9007FB230 /* pulsatingJPAS2.py */,
+				F1A36CD418084DD9007FB230 /* pulsatingStar.py */,
+				F1A36CD518084DD9007FB230 /* transient.py */,
+				F1A36CD618084DD9007FB230 /* transientJPAS2.py */,
+				F1A36CD8180A25B9007FB230 /* varModels.py */,
+				F1A36CDA180AED7E007FB230 /* runMCSIM.py */,
+				F1A36CDB180B63EA007FB230 /* runMCSIM_P.py */,
+				F1A36CDC180CDCDD007FB230 /* runMCSIM_PP.py */,
+				F1A36CDD180CDD03007FB230 /* runMCSIM_pulsating.py */,
+				F1A36CDE180D619D007FB230 /* runMCSIM_transients.py */,
+				F16FC59C180E0443002940C8 /* probmap_transient.py */,
+				F16FC59D180E0DEC002940C8 /* probmap_pulsating.py */,
+				F16FC59E180ECF96002940C8 /* probmap_binary.py */,
+				F1A36CD9180A25D5007FB230 /* __init__.py */,
+			);
+			name = variability;
+			sourceTree = "<group>";
+		};
+		F1A876CB18A66BC1006F4F57 /* stellarClassJPAS */ = {
+			isa = PBXGroup;
+			children = (
+				F1A876CC18A66C04006F4F57 /* sortSPType.py */,
+				F1F8F58A18D0FBF1006B551B /* fmatch.py */,
+			);
+			name = stellarClassJPAS;
+			sourceTree = "<group>";
+		};
+		F1C36BFC17A3F60B0045AEB6 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				F1C36BFE17A3F8290045AEB6 /* tao.py */,
+				F1C36BFF17A3F94E0045AEB6 /* __init__.py */,
+			);
+			name = core;
+			sourceTree = "<group>";
+		};
 		F1DE092715C624AA00632AEB = {
 			isa = PBXGroup;
 			children = (
+				F1A876CB18A66BC1006F4F57 /* stellarClassJPAS */,
+				F1A36CCD18084DB7007FB230 /* variability */,
+				F1EF7C7C17F59DC100AD52EC /* Figures */,
+				F1FBC4761600DDBE00FB17C6 /* tests */,
+				F1404CD71600BDB00083C93D /* coordinatesystemandtiling */,
+				F13BC2DA1823E89A004B1428 /* T80S_camera */,
+				F14FC2DE18BFBAE400F8BE5C /* S-PLUS */,
+				F186F810170081E9001C88C3 /* Scheduler */,
+				F17BD2A515FED6BA00ECF6C7 /* bestArea01.py */,
+				F1EF7C7317F23B2200AD52EC /* mkqueue */,
+				F1EBDF8C179E234200DE3208 /* ChimeraTAO */,
+				F17BD2A615FED6BA00ECF6C7 /* calcVisArea.py */,
+				F17BD2A715FED6BA00ECF6C7 /* figure1.py */,
+				F17BD2A815FED6BA00ECF6C7 /* figure2.py */,
+				F17E90D416D8BC8A00FF61EF /* showTiledAreas.py */,
+				F17BD2A915FED6BA00ECF6C7 /* figure3.py */,
+				F17BD2AA15FED6BA00ECF6C7 /* selectArea.py */,
+				F17BD2AB15FED6BA00ECF6C7 /* showObsArea.py */,
+				F17BD2AC15FED6BA00ECF6C7 /* tileMaker.py */,
+				F1DE093015C624CB00632AEB /* visibility.c */,
+				F1DE093F15C6D7C500632AEB /* Makefile */,
+				F1DE093115C6271900632AEB /* _skysub.c */,
+				F1DE093215C6271900632AEB /* skysub.h */,
 			);
+			sourceTree = "<group>";
+		};
+		F1EBDF8C179E234200DE3208 /* ChimeraTAO */ = {
+			isa = PBXGroup;
+			children = (
+				F1EBDF90179E247200DE3208 /* __init__.py */,
+				F1EBDF8D179E234200DE3208 /* src */,
+				F1EA4D2417A02CF400B20123 /* request.py */,
+				F1EA4D2517A031A800B20123 /* tao.cfg */,
+			);
+			path = ChimeraTAO;
+			sourceTree = "<group>";
+		};
+		F1EBDF8D179E234200DE3208 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				F1C36BFC17A3F60B0045AEB6 /* core */,
+				F1EBDF91179E249400DE3208 /* __init__.py */,
+				F1EBDF8E179E234200DE3208 /* util */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		F1EBDF8E179E234200DE3208 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				F1EBDF8F179E234200DE3208 /* util.py */,
+				F1EBDF92179E24A700DE3208 /* __init__.py */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		F1EF7C7317F23B2200AD52EC /* mkqueue */ = {
+			isa = PBXGroup;
+			children = (
+				F1EF7C7617F23BAE00AD52EC /* __init__.py */,
+				F1EF7C7A17F2F2E300AD52EC /* chimera-mkqueue */,
+				F1EF7C7517F23B7800AD52EC /* src */,
+			);
+			name = mkqueue;
+			sourceTree = "<group>";
+		};
+		F1EF7C7517F23B7800AD52EC /* src */ = {
+			isa = PBXGroup;
+			children = (
+				F1EF7C7717F23BF000AD52EC /* mkqueue.py */,
+				F1EF7C7B17F2F67200AD52EC /* __init__.py */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		F1EF7C7C17F59DC100AD52EC /* Figures */ = {
+			isa = PBXGroup;
+			children = (
+				F1EF7C7D17F59DFA00AD52EC /* plot_airmasses.py */,
+				F1EF7C7F17F5FD2E00AD52EC /* plot_airmass_obs.py */,
+				F1EF7C7E17F5F00000AD52EC /* plot_airmasses_02.py */,
+				F1C6A37A18CBA8A100B41655 /* compareSurveys.py */,
+			);
+			name = Figures;
+			sourceTree = "<group>";
+		};
+		F1FBC4761600DDBE00FB17C6 /* tests */ = {
+			isa = PBXGroup;
+			children = (
+				F1FBC4771600DDBE00FB17C6 /* sphere.py */,
+				F176347516CBBF6700F5ACC9 /* pltpts.py */,
+			);
+			path = tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
