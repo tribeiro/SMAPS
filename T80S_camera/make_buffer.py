@@ -3,7 +3,8 @@
 import sys,os
 import numpy as np
 import pylab as py
-import pyfits
+#import pyfits
+from astropy.io import fits as pyfits
 import matplotlib.cm as cm
 
 '''
@@ -27,6 +28,10 @@ buffery = [	[   0 , 100] ,
 sizex = 9264
 sizey = 2400
 
+Quadrants = {   'Q1' : [ [4632, 4632] , [1200, 1200] ] ,
+                'Q2' : [ [4632, 4632] , [0000, 1200] ] ,
+                'Q3' : [ [0000, 4632] , [1200, 1200] ] ,
+                'Q4' : [ [0000, 4632] , [0000, 1200] ] ,}
 ## Q1
 #bufferx = [ [4632, 4632] ]
 #buffery = [ [1200, 1200] ]

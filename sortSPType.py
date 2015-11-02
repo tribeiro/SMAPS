@@ -12,7 +12,7 @@
 
 import sys,os
 import numpy as np
-import pyfits
+from astropy.io import fits as pyfits
 
 ##########################################################################################
 
@@ -40,7 +40,17 @@ def main(argv):
 	tb = pyfits.open(opt.filename)
 	print '# - Read %s with %i entries'%(opt.filename,len(tb[1].data))
 	
-	# Get unique ids for spectral types.
+	oname = '%s.lis'%(opt.output)
+	sys.stdout.write('# - Writing full list to %s ...'%oname)
+	sys.stdout.flush()
+	fp = open(oname,'w')
+
+	for entry in tb[1].data:
+		fp.write('spec-%04i-%i-%04i.npy,%s,%s\n'%(	entry['plate'],entry['mjd'],entry['fiberID'],
+                                            entry['class'].replace(' ',''),
+                                            entry['subclass'].replace(' ','') ))
+	fp.close()
+    # Get unique ids for spectral types.
 
 	sptypes = np.unique(tb[1].data['subclass'])
 

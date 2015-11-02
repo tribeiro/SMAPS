@@ -7,16 +7,20 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		F109B6701A3C2C43009A88BA /* track.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = track.py; path = T80/track.py; sourceTree = "<group>"; };
+		F109B6711A430BD1009A88BA /* wcs_plot.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = wcs_plot.py; path = T80/wcs_plot.py; sourceTree = "<group>"; };
 		F12D202F18C116500044FAF4 /* surveysim_02.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = surveysim_02.py; path = SPLUS/surveysim_02.py; sourceTree = "<group>"; };
 		F12D203018C425530044FAF4 /* surveysimF.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = surveysimF.py; path = SPLUS/surveysimF.py; sourceTree = "<group>"; };
 		F12D203118C434950044FAF4 /* surveysim_03.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = surveysim_03.py; path = SPLUS/surveysim_03.py; sourceTree = "<group>"; };
 		F12D203318C7F5580044FAF4 /* surveyEvol.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = surveyEvol.py; path = SPLUS/surveyEvol.py; sourceTree = "<group>"; };
+		F131A2DE19461577009D5FFD /* maskcombine.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = maskcombine.py; sourceTree = "<group>"; };
 		F13BC2D918231FCA004B1428 /* make_buffer.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = make_buffer.py; path = T80S_camera/make_buffer.py; sourceTree = "<group>"; };
 		F13BC2DB1823E8E5004B1428 /* cosmetics.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = cosmetics.py; path = T80S_camera/cosmetics.py; sourceTree = "<group>"; };
 		F13BC2DC1823F7E1004B1428 /* imageboxcarr.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = imageboxcarr.py; path = T80S_camera/imageboxcarr.py; sourceTree = "<group>"; };
 		F13BC2E0182A701F004B1428 /* imageboxcarr_ocl.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = imageboxcarr_ocl.py; path = T80S_camera/imageboxcarr_ocl.py; sourceTree = "<group>"; };
 		F13BC2E2182A87A3004B1428 /* badpixelmask.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = badpixelmask.py; path = T80S_camera/badpixelmask.py; sourceTree = "<group>"; };
 		F13BC2E3182AAE23004B1428 /* hotpixelmask.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = hotpixelmask.py; path = T80S_camera/hotpixelmask.py; sourceTree = "<group>"; };
+		F13C72971A904E73007D84AA /* read_x8-2.cla_vtr.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = "read_x8-2.cla_vtr.py"; sourceTree = "<group>"; };
 		F1404CD81600BDB00083C93D /* apuntado_norte2.f */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.fortran; path = apuntado_norte2.f; sourceTree = "<group>"; };
 		F1404CD91600BDB00083C93D /* apuntado_sur2.f */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.fortran; path = apuntado_sur2.f; sourceTree = "<group>"; };
 		F1404CDA1600BDB00083C93D /* cambio de coordenadas version 2.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "cambio de coordenadas version 2.pdf"; sourceTree = "<group>"; };
@@ -59,15 +63,20 @@
 		F1A36CDD180CDD03007FB230 /* runMCSIM_pulsating.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = runMCSIM_pulsating.py; path = variability/runMCSIM_pulsating.py; sourceTree = "<group>"; };
 		F1A36CDE180D619D007FB230 /* runMCSIM_transients.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = runMCSIM_transients.py; path = variability/runMCSIM_transients.py; sourceTree = "<group>"; };
 		F1A876CC18A66C04006F4F57 /* sortSPType.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = sortSPType.py; sourceTree = "<group>"; };
+		F1AA2FB81A7FD3A300F2027F /* track2.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = track2.py; path = T80/track2.py; sourceTree = "<group>"; };
+		F1AA2FBC1A842B6800F2027F /* track3.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = track3.py; path = T80/track3.py; sourceTree = "<group>"; };
+		F1AA2FBD1A88E5B200F2027F /* date2jd.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = date2jd.py; path = T80/date2jd.py; sourceTree = "<group>"; };
 		F1B25ECA18042B1500664742 /* anim_fits.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = anim_fits.py; sourceTree = "<group>"; };
 		F1C36BFE17A3F8290045AEB6 /* tao.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = tao.py; path = core/tao.py; sourceTree = "<group>"; };
 		F1C36BFF17A3F94E0045AEB6 /* __init__.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = __init__.py; path = core/__init__.py; sourceTree = "<group>"; };
 		F1C6A37A18CBA8A100B41655 /* compareSurveys.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = compareSurveys.py; sourceTree = "<group>"; };
 		F1D8A8B118E2CC9000693FF4 /* splus_selectregions.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = splus_selectregions.py; sourceTree = "<group>"; };
+		F1DBF70C195CC43C004B88B3 /* plhist.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = plhist.py; sourceTree = "<group>"; };
 		F1DE093015C624CB00632AEB /* visibility.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = visibility.c; sourceTree = "<group>"; };
 		F1DE093115C6271900632AEB /* _skysub.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = _skysub.c; sourceTree = "<group>"; };
 		F1DE093215C6271900632AEB /* skysub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = skysub.h; sourceTree = "<group>"; };
 		F1DE093F15C6D7C500632AEB /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		F1DF00211A7CA83C00A1B647 /* diffpt.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; name = diffpt.py; path = T80/diffpt.py; sourceTree = "<group>"; };
 		F1EA4D2417A02CF400B20123 /* request.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = request.py; sourceTree = "<group>"; };
 		F1EA4D2517A031A800B20123 /* tao.cfg */ = {isa = PBXFileReference; lastKnownFileType = text; name = tao.cfg; path = /Users/tiago/Develop/SMAPs/ChimeraTAO/src/../tao.cfg; sourceTree = "<absolute>"; };
 		F1EBDF8F179E234200DE3208 /* util.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = util.py; sourceTree = "<group>"; };
@@ -89,6 +98,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		F109B66F1A3C2C17009A88BA /* T80S */ = {
+			isa = PBXGroup;
+			children = (
+				F109B6701A3C2C43009A88BA /* track.py */,
+				F1AA2FB81A7FD3A300F2027F /* track2.py */,
+				F1AA2FBC1A842B6800F2027F /* track3.py */,
+				F1AA2FBD1A88E5B200F2027F /* date2jd.py */,
+				F109B6711A430BD1009A88BA /* wcs_plot.py */,
+				F1DF00211A7CA83C00A1B647 /* diffpt.py */,
+			);
+			name = T80S;
+			sourceTree = "<group>";
+		};
 		F13BC2DA1823E89A004B1428 /* T80S_camera */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +120,7 @@
 				F13BC2DB1823E8E5004B1428 /* cosmetics.py */,
 				F13BC2E2182A87A3004B1428 /* badpixelmask.py */,
 				F13BC2E3182AAE23004B1428 /* hotpixelmask.py */,
+				F131A2DE19461577009D5FFD /* maskcombine.py */,
 			);
 			name = T80S_camera;
 			sourceTree = "<group>";
@@ -173,8 +196,10 @@
 		F1A876CB18A66BC1006F4F57 /* stellarClassJPAS */ = {
 			isa = PBXGroup;
 			children = (
-				F1A876CC18A66C04006F4F57 /* sortSPType.py */,
 				F1F8F58A18D0FBF1006B551B /* fmatch.py */,
+				F1A876CC18A66C04006F4F57 /* sortSPType.py */,
+				F1DBF70C195CC43C004B88B3 /* plhist.py */,
+				F13C72971A904E73007D84AA /* read_x8-2.cla_vtr.py */,
 			);
 			name = stellarClassJPAS;
 			sourceTree = "<group>";
@@ -191,6 +216,7 @@
 		F1DE092715C624AA00632AEB = {
 			isa = PBXGroup;
 			children = (
+				F109B66F1A3C2C17009A88BA /* T80S */,
 				F1A876CB18A66BC1006F4F57 /* stellarClassJPAS */,
 				F1A36CCD18084DB7007FB230 /* variability */,
 				F1EF7C7C17F59DC100AD52EC /* Figures */,

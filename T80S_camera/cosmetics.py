@@ -38,6 +38,7 @@ def main(argv):
 
 	_path = '/Volumes/TiagoHD2/data/Grade5results'
 	_path = '/Volumes/TiagoHD2/data/JPAS/11333-19-01'
+	_path = '/Volumes/TiagoHD2/data/CCD290'
 	
 	ifile = 'CCD0_Mode0_1x1_5Ke-CTE.fits'
 	
@@ -70,6 +71,13 @@ def main(argv):
 				'hot0008.fits' ,
 				'hot0012.fits' ,
 				'hot0016.fits' ]
+
+	masks = ['h01m_1dark01.fits', 'h02m_1dark01.fits', 'h03m_1dark01.fits',\
+             'h04m_1dark01.fits', 'h01m_1dark03.fits', 'h02m_1dark03.fits',\
+             'h03m_1dark03.fits', 'h04m_1dark03.fits', 'h01m_1dark05.fits',\
+             'h02m_1dark05.fits', 'h03m_1dark05.fits', 'h04m_1dark05.fits',\
+             'h01m_1dark07.fits', 'h02m_1dark07.fits', 'h03m_1dark07.fits',\
+             'h04m_1dark07.fits']
 
 	title = [	'CCD  0',
 'CCD  1',

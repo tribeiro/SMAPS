@@ -8,7 +8,8 @@ import sys,os
 from optparse import OptionParser
 import numpy as np
 import pylab as py
-import pyfits
+#import pyfits
+from astropy.io import fits as pyfits
 import matplotlib.cm as cm
 import make_buffer
 import scipy.ndimage
